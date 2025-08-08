@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
       case "primary":
         return "bg-primary";
       case "secondary":
-        return "bg-secondary-200";
+        return "bg-secondary";
       case "outline":
         return "bg-transparent border border-primary";
       case "ghost":
