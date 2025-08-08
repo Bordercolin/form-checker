@@ -1,20 +1,14 @@
-import React, { useEffect } from "react";
-import { Text, View } from "react-native";
-import { ScreenLayout } from "../components/design/ScreenLayout";
-import { Button } from "../components/design/Button";
+import React, { useEffect, useState } from "react";
 
+import { ScreenLayout } from "../components/design/ScreenLayout";
+import { RegisterForm } from "@components/functional/forms/RegisterForm";
 
 export default function HomePage() {
- 
-
   return (
     <>
-      <ScreenLayout>
-        <Button title="Click me" variant="secondary" onPress={() => {
-          console.log("Button clicked");
-        }} />
+      <ScreenLayout scrollable={false}>
+        <RegisterForm />
       </ScreenLayout>
     </>
   );
-
 }
