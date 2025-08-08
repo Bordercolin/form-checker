@@ -2,18 +2,11 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@services/*": [
-        "services/*"
-      ]
+      "@components/*": ["components/*"],
+      "@screens/*": ["screens/*"],
+      "@lib/*": ["lib/*"],
+      "@services/*": ["services/*"],
+      "@middleware/*": ["middleware/*"]
     }
   },
   "extends": "expo/tsconfig.base"
