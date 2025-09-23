@@ -3,9 +3,11 @@ import { ScreenLayout } from "../components/design/ScreenLayout";
 import { Button } from "../components/design/Button";
 import { View, Text } from "react-native";
 import { useAuth } from "@middleware/auth";
+import { useRouter } from "expo-router";
 
 export default function HomePage() {
   const { user, signOut } = useAuth();
+  const router = useRouter();
 
   return (
     <ScreenLayout>
@@ -17,7 +19,18 @@ export default function HomePage() {
           <Text className="text-gray-600 mb-6">
             You are logged in as: {user?.email}
           </Text>
-          <Button title="Sign Out" onPress={signOut} variant="outline" />
+          <View className="space-y-3">
+            <Button
+              title="Record Videos"
+              onPress={() => router.push("/record")}
+            />
+            <Button
+              title="My Videos"
+              onPress={() => router.push("/videos")}
+              variant="outline"
+            />
+            <Button title="Sign Out" onPress={signOut} variant="outline" />
+          </View>
         </View>
       </View>
     </ScreenLayout>

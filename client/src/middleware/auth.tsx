@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { Session, User } from "@supabase/supabase-js";
-import { useRouter, useSegments } from "expo-router";
+import { router } from "expo-router";
 
 interface AuthContextType {
   user: User | null;
@@ -17,8 +17,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [initialized, setInitialized] = useState(false);
-  const router = useRouter();
-  const segments = useSegments();
 
   useEffect(() => {
     // Get initial session
@@ -45,18 +43,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!initialized) return;
 
-    const inAuthGroup = segments[0] === "(auth)";
-    const currentPath = segments.join("/");
-
-    // Only redirect if user is authenticated and trying to access auth screens
-    if (user && inAuthGroup) {
-      router.replace("/");
+    if (!user) {
+      // No user = redirect to login
+      setTimeout(() => {
+        router.replace("/(auth)/login");
+      }, 100);
     }
-    // Only redirect to login if user is not authenticated and not already on an auth screen
-    else if (!user && !inAuthGroup && currentPath !== "/") {
-      router.replace("/(auth)/login");
-    }
-  }, [user, initialized, segments]);
+  }, [user, initialized]);
 
   const signOut = async () => {
     await supabase.auth.signOut();

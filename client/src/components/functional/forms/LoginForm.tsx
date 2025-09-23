@@ -3,6 +3,7 @@ import { InputField } from "@components/design/InputField";
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { router } from "expo-router";
 import { supabase } from "@lib/supabase";
 
 export const LoginForm = () => {
@@ -24,16 +25,20 @@ export const LoginForm = () => {
     setLoading(true);
     setError("");
 
-    const { data: user, error } = await supabase.auth.signInWithPassword({
+    const { data: authData, error } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
     });
 
     if (error) {
+      console.error("❌ Login failed:", error.message);
       setError(error.message);
+      setLoading(false);
+    } else {
+      // Redirect to homepage after successful login
+      console.log("🔄 Redirecting to homepage...");
+      router.push("/");
     }
-
-    setLoading(false);
   };
 
   return (
