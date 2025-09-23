@@ -9,6 +9,8 @@ export default function HomePage() {
   const { user, signOut } = useAuth();
   const router = useRouter();
 
+
+
   return (
     <ScreenLayout>
       <View className="flex-1 justify-center items-center px-6">
